@@ -83,6 +83,7 @@ public class UserController {
         user.setNextUrl(request.getContextPath() + "/mvc/home");    //单独控制地址
         responseObj.setData(user);
         session.setAttribute("userInfo", user);
+
         result = new GsonUtils().toJson(responseObj);
         return result;
     }
@@ -135,7 +136,10 @@ public class UserController {
                 responseObj.setData(user1);
                 userService.updateLoginSession(request.getSession().getId(), user.getLoginId());
                 session.setAttribute("userInfo", user);
+                System.out.println("登陆的信息："+user1);
                 result = new GsonUtils().toJson(responseObj);
+                System.out.println("登陆的信息1："+result);
+
             } else {
                 responseObj = new ResponseObj<User>();
                 responseObj.setCode(ResponseObj.FAILED);
