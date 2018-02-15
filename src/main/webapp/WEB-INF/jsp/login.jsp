@@ -77,19 +77,17 @@
                     data: {loginId: name, pwd: pwd},   //存放的数据，服务器接口字段为accountName和password，分别对应用户登录名和密码
                     dataType: 'json',   //当这里指定为json的时候，获取到了数据后会自己解析的，只需要 返回值.字段名称 就能使用了
                     cache: false,  //不用缓存
-                   success: window.location.href = "<%=request.getContextPath()%>/mvc/home"//跳转到主页
-
-                <%--success: function (data) { //请求成功，http状态码为200。返回的数据已经打包在data中了--%>
-                        <%--if (data.code == 1) {  //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功--%>
-                            <%--// window.location.href = data.data.nextUrl; //跳转到主页--%>
-                            <%--window.location.href = "<%=request.getContextPath()%>/mvc/home"; //跳转到主页--%>
+                success: function (data) { //请求成功，http状态码为200。返回的数据已经打包在data中了
+                        if (data.code == 1) {  //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功
+                            // window.location.href = data.data.nextUrl; //跳转到主页
+                            window.location.href = "<%=request.getContextPath()%>/mvc/home"; //跳转到主页
 
 
-                        <%--} else {--%>
-                            <%--alert(data.msg);--%>
-                            <%--$("#u").focus();--%>
-                        <%--}--%>
-                    <%--}--%>
+                        } else {
+                            alert(data.msg);
+                            $("#u").focus();
+                        }
+                    }
                 });
             }
         }
@@ -111,12 +109,10 @@
                 用户信息登陆
             </div>
             <%--<form name="form">--%>
-            <form action="" name="loginform"
-                  <%--accept-charset="utf-8"--%>
-                  id="login_form"
-                  class="loginForm"
-                  <%--method="post"--%>
-            >
+            <form name="loginform" id="login_form" class="cont_form_login"
+                  action=""
+            <%--accept-charset="utf-8"--%>
+                  method="POST">
                 <div class="md-form-group float-label">
                     <input type="text"  id="u" name="loginId" class="md-input" ng-model="user.email" required>
                     <label>账户名</label>
@@ -130,7 +126,7 @@
                         <input type="checkbox"><i class="primary"></i> Keep me signed in
                     </label>
                 </div>
-                <button type="submit" onclick="webLogin();" class="btn primary btn-block p-x-md">登陆</button>
+                <a type="button" onclick="webLogin();" class="btn primary btn-block p-x-md">登陆</a>
             </form>
         </div>
 

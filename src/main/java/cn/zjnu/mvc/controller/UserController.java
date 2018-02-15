@@ -134,11 +134,11 @@ public class UserController {
                 responseObj.setCode(ResponseObj.OK);
                 responseObj.setMsg(ResponseObj.OK_STR);
                 responseObj.setData(user1);
-                userService.updateLoginSession(request.getSession().getId(), user.getLoginId());
+                //userService.updateLoginSession(request.getSession().getId(), user.getLoginId());
                 session.setAttribute("userInfo", user);
                 System.out.println("登陆的信息："+user1);
                 result = new GsonUtils().toJson(responseObj);
-                System.out.println("登陆的信息1："+result);
+                System.out.println("登陆的信息1："+new GsonUtils().toJson(responseObj));
 
             } else {
                 responseObj = new ResponseObj<User>();
