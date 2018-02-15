@@ -149,6 +149,8 @@
 <script src="/static/B4/libs/jquery/underscore/underscore-min.js"></script>
 <script src="/static/B4/libs/jquery/jQuery-Storage-API/jquery.storageapi.min.js"></script>
 <script src="/static/B4/libs/jquery/PACE/pace.min.js"></script>
+<script src="/static/B4/libs/jquery/screenfull/dist/screenfull.min.js"></script>
+
 
 <script src="/static/B4/scripts/config.lazyload.js"></script>
 

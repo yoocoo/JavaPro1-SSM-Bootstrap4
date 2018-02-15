@@ -41,8 +41,8 @@ public class MainController {
      *
      * @return
      */
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "home", method = RequestMethod.GET)
     public String home() {
-        return "home";
+        return "admin/admin_home";
     }
 }
