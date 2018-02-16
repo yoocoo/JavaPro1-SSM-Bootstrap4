@@ -77,6 +77,11 @@ public class ActionLogServiceImpl implements ActionLogService {
         return actionLogDao.findAll(pageNum * pageSize + 1, pageSize);
     }
 
+    @Override
+    public List<UserActionLog> getLogs() {
+        return actionLogDao.findLogs();
+    }
+
     public int getAllCount() {
         return actionLogDao.getAllCount();
     }

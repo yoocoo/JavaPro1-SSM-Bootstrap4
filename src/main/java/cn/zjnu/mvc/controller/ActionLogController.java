@@ -4,13 +4,20 @@ import cn.zjnu.domain.ResponseList;
 import cn.zjnu.domain.ResponseObj;
 import cn.zjnu.domain.UserActionLog;
 import cn.zjnu.service.ActionLogService;
+import cn.zjnu.utils.DataTablePageUtil;
 import cn.zjnu.utils.GsonUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,6 +28,57 @@ import java.util.List;
 public class ActionLogController {
     @Autowired
     ActionLogService actionLogService;
+
+
+    /**
+     * 日志数据表格主页
+     *
+     * @return
+     */
+    @RequestMapping(value = "/adminTable", method = RequestMethod.GET)
+    public String table() {
+        return "admin/admin_table";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    //@ResponseBody
+    public void PageAdminList(HttpServletRequest request, HttpServletResponse response) {
+        //使用DataTables的属性接收分页数据
+        DataTablePageUtil<UserActionLog> dataTable = new DataTablePageUtil<>(request);
+        //开始分页：PageHelper会处理接下来的第一个查询
+        PageHelper.startPage(dataTable.getPage_num(), dataTable.getLength());
+        //还是使用List，方便后期用到
+        List<UserActionLog> userList = actionLogService.getLogs();
+        System.out.println("userList:" + new GsonUtils().toJson(userList));
+
+
+        //用PageInfo对结果进行包装
+        PageInfo<UserActionLog> pageInfo = new PageInfo<>(userList);
+        System.out.println("pageInfo!!!!:" + new GsonUtils().toJson(pageInfo));
+
+        List<UserActionLog> pageList =pageInfo.getList();
+        System.out.println("pageList!!!!:" + new GsonUtils().toJson(pageList));
+
+
+        //封装数据给DataTables
+        dataTable.setDraw(dataTable.getDraw());
+        dataTable.setData(pageInfo.getList());
+        //dataTable.setData(pageList);
+        dataTable.setRecordsTotal(pageInfo.getTotal());
+        dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
+        //返回数据到页面
+        System.out.println("所有的日志列表!!!!:" + new GsonUtils().toJson(dataTable));
+        try {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/json");
+            response.getWriter().write(new GsonUtils().toJson(dataTable));
+            System.out.println("所有的日志列表:" + new GsonUtils().toJson(dataTable));
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 分页查找行为日志，其实druid里面已经包含了行为日志

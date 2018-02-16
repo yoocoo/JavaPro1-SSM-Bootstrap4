@@ -42,7 +42,9 @@ public class MainController {
      * @return
      */
     @RequestMapping(value = "home", method = RequestMethod.GET)
+
     public String home() {
         return "admin/admin_home";
     }
+
 }

@@ -13,6 +13,9 @@ public interface ActionLogService extends BaseService<UserActionLog> {
 
     List<UserActionLog> findAll(int pageNum, int pageSize);
 
+    //基于BootStrap4+Datatable+Myabtis+PageHelper版本的数据表格
+    List<UserActionLog> getLogs();
+
     /**
      * 获取总条数
      * @return  获取总条数

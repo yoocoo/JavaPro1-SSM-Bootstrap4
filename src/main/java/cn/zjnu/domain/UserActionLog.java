@@ -145,20 +145,34 @@ public class UserActionLog implements Serializable {
     @Override
     public String toString() {
         return "UserActionLog{" +
-                "id=" + id +
-                ", loginId='" + loginId + '\'' +
-                ", sessionId='" + sessionId + '\'' +
-                ", ipAddrV4='" + ipAddrV4 + '\'' +
-                ", ipAddrV6='" + ipAddrV6 + '\'' +
-                ", osName='" + osName + '\'' +
-                ", osVersion='" + osVersion + '\'' +
-                ", broName='" + broName + '\'' +
-                ", broVersion='" + broVersion + '\'' +
-                ", requestBody='" + requestBody + '\'' +
-                ", description='" + description + '\'' +
-                ", other='" + other + '\'' +
-                ", method='" + method + '\'' +
-                ", time=" + time +
-                '}';
+                "loginId='" + loginId + '\''
+                +"sessionId='" + sessionId + '\''
+                +"ipAddrV4='" + ipAddrV4 + '\''
+                +"ipAddrV6='" + ipAddrV6 + '\''
+                +"osName='" + osName + '\''
+                +"osVersion='" + osVersion + '\''
+                +"broName='" + broName + '\''
+                +"broVersion='" + broVersion + '\''
+                +"requestBody='" + requestBody + '\''
+                +"description='" + description + '\''
+                +"other='" + other + '\''
+                +"method='" + method + '\''
+                +"time='" + time + '\''+
+        '}';
+
+        //", loginId='" + loginId + '\'' +
+        //        ", sessionId='" + sessionId + '\'' +
+        //        ", ipAddrV4='" + ipAddrV4 + '\'' +
+        //        ", ipAddrV6='" + ipAddrV6 + '\'' +
+        //        ", osName='" + osName + '\'' +
+        //        ", osVersion='" + osVersion + '\'' +
+        //        ", broName='" + broName + '\'' +
+        //        ", broVersion='" + broVersion + '\'' +
+        //        ", requestBody='" + requestBody + '\'' +
+        //        ", description='" + description + '\'' +
+        //        ", other='" + other + '\'' +
+        //        ", method='" + method + '\'' +
+        //        ", time=" + time +
+        //        '}';
     }
 }

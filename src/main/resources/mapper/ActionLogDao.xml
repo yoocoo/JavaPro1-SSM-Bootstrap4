@@ -28,4 +28,12 @@
 		FROM
 			`user_action_log`;
     </select>
+    <!--基于BootStrap4+Datatable+Myabtis+PageHelper版本的数据表格-->
+    <select id="findLogs" resultType="cn.zjnu.domain.UserActionLog">
+          SELECT
+			*
+		FROM
+			`user_action_log`
+
+    </select>
 </mapper>

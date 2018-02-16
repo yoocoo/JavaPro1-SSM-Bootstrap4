@@ -15,6 +15,9 @@ public interface ActionLogDao extends Dao<UserActionLog> {
 
     UserActionLog findOneById(Serializable Id);
 
+    //基于BootStrap4+Datatable+Myabtis+PageHelper版本的数据表格
+    List<UserActionLog> findLogs();
+
     /**
      * 分页查询
      * @param offset    起始位置
