@@ -14,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,50 +37,53 @@ public class ActionLogController {
      *
      * @return
      */
-    @RequestMapping(value = "/adminTable", method = RequestMethod.GET)
-    public String table() {
-        return "admin/admin_table";
+    @RequestMapping(value = "/adminTable")
+    public ModelAndView Page() {
+        ModelAndView view = new ModelAndView("admin/admin_table");
+        return view;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    //@ResponseBody
-    public void PageAdminList(HttpServletRequest request, HttpServletResponse response) {
+    @ResponseBody
+    public Object PageAdminList(HttpServletRequest request, HttpServletResponse response) {
         //使用DataTables的属性接收分页数据
-        DataTablePageUtil<UserActionLog> dataTable = new DataTablePageUtil<>(request);
+        DataTablePageUtil<UserActionLog> dataTable = new DataTablePageUtil<UserActionLog>(request);
         //开始分页：PageHelper会处理接下来的第一个查询
         PageHelper.startPage(dataTable.getPage_num(), dataTable.getLength());
+        System.out.println("getPage_num!!!!:" + dataTable.getPage_num());
+        System.out.println("getLength!!!!:" + dataTable.getLength());
+
         //还是使用List，方便后期用到
         List<UserActionLog> userList = actionLogService.getLogs();
         System.out.println("userList:" + new GsonUtils().toJson(userList));
 
 
         //用PageInfo对结果进行包装
-        PageInfo<UserActionLog> pageInfo = new PageInfo<>(userList);
-        System.out.println("pageInfo!!!!:" + new GsonUtils().toJson(pageInfo));
+        PageInfo<UserActionLog> pageInfos = new PageInfo<UserActionLog>(userList);
+        System.out.println("pageInfos!!!!:" + pageInfos);
 
-        List<UserActionLog> pageList =pageInfo.getList();
-        System.out.println("pageList!!!!:" + new GsonUtils().toJson(pageList));
+        List<UserActionLog> pageList = pageInfos.getList();
+        System.out.println("pageList!!!!:" + pageList);
 
 
         //封装数据给DataTables
         dataTable.setDraw(dataTable.getDraw());
-        dataTable.setData(pageInfo.getList());
-        //dataTable.setData(pageList);
-        dataTable.setRecordsTotal(pageInfo.getTotal());
+        dataTable.setData(pageInfos.getList());
+        dataTable.setRecordsTotal((int)pageInfos.getTotal());
         dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
         //返回数据到页面
         System.out.println("所有的日志列表!!!!:" + new GsonUtils().toJson(dataTable));
-        try {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/json");
-            response.getWriter().write(new GsonUtils().toJson(dataTable));
-            System.out.println("所有的日志列表:" + new GsonUtils().toJson(dataTable));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("总数!!!!:" + (int)pageInfos.getTotal());
+        return dataTable;
     }
+
+    //private List<GroupsDto> convertToGroupDto(List<Groups> list) {
+    //    List<GroupsDto> newList = new ArrayList<>();
+    //    for (Groups item : list) {
+    //        newList.add(modelMapper.map(item, GroupsDto.class));
+    //    }
+    //    return newList;
+    //}
 
     /**
      * 分页查找行为日志，其实druid里面已经包含了行为日志

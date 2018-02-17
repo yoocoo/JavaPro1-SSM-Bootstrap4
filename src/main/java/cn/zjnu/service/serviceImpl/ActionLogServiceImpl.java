@@ -79,7 +79,9 @@ public class ActionLogServiceImpl implements ActionLogService {
 
     @Override
     public List<UserActionLog> getLogs() {
-        return actionLogDao.findLogs();
+        List<UserActionLog> list = actionLogDao.findLogs();
+        return list;
+        //return actionLogDao.findLogs();
     }
 
     public int getAllCount() {
