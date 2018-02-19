@@ -615,6 +615,17 @@
                     </div>
                     <div class="table-responsive">
                         <table id="tables" cellspacing="0" width="100%" class="table table-striped b-t b-b">
+                            <%--点击隐藏某列:--%>
+
+                                <p class="btn-groups">
+
+                                    <button  class="btn btn-outline b-primary text-primary">点击动态隐藏某列</button>
+                                    <button  data-column="0" class="btn btn-outline b-primary text-primary">账户名</button>
+                                    <button  data-column="1" class="btn btn-outline b-info text-info">姓名</button>
+                                    <button  data-column="2" class="btn btn-outline b-success text-success">年龄</button>
+                                    <button data-column="3" class="btn btn-outline b-warning text-warning">职务</button>
+                                    <button data-column="4" class="btn btn-outline b-danger text-danger">电话号码</button>
+                                </p>
                             <thead>
                             <tr>
                                 <%--<th style="width:20%">头像</th>--%>
@@ -932,7 +943,8 @@
 //             editor.disable('postAdress');
 //         });
         //DataTable
-        $('#tables').DataTable({
+        var table = $('#tables').DataTable({
+        // $('#tables').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 {
@@ -1028,6 +1040,17 @@
                 return row;
             }
         });
+
+        //        隐藏某列
+       $('a.toggle-vis').on( 'click', function (e) {
+           e.preventDefault();
+
+           // Get the column API object
+           var column = table.column( $(this).attr('data-column') );
+
+           // Toggle the visibility
+           column.visible( ! column.visible() );
+       } );
     });
     // // Apply the search
 
