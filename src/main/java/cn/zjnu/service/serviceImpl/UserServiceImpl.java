@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll(String keyword, String column, String orderby){
-        List<User>  list = userDao.findAll(keyword,column,orderby);
+    public List<User> findAll(String keyword, String column, String orders){
+        List<User>  list = userDao.findAll(keyword,column,orders);
         return list;
     }
 

@@ -36,6 +36,16 @@ public class UserController extends BaseController{
     private UserService userService;    //自动载入Service对象
 
     private ResponseObj responseObj;
+    /**
+     * 用户数据列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/page")
+    public ModelAndView Page() {
+        ModelAndView view = new ModelAndView("admin/admin_user");
+        return view;
+    }
 
     /**
      * 为什么返回值是一个ModelAndView，ModelAndView代表一个web页面<br/>
@@ -140,10 +150,7 @@ public class UserController extends BaseController{
                 responseObj.setData(user1);
                 //userService.updateLoginSession(request.getSession().getId(), user.getLoginId());
                 session.setAttribute("userInfo", user);
-                System.out.println("登陆的信息："+user1);
                 result = new GsonUtils().toJson(responseObj);
-                System.out.println("登陆的信息1："+new GsonUtils().toJson(responseObj));
-
             } else {
                 responseObj = new ResponseObj<User>();
                 responseObj.setCode(ResponseObj.FAILED);
@@ -178,7 +185,7 @@ public class UserController extends BaseController{
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/clist", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/list", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public Object pageLocationChangeList() {
 
         DataTablePageUtil<User> dataTable = new DataTablePageUtil<User>(this.getRequest());
@@ -191,8 +198,8 @@ public class UserController extends BaseController{
         String orderDir = getRequest().getParameter("order[0][dir]");//排序的顺序asc or desc
         String orderColumn = getRequest().getParameter("columns[" + order + "][data]");//排序的列。注意，我认为页面上的列的名字要和表中列的名字一致，否则，会导致SQL拼接错误
         //为了能让 字段名和 前段取得字段名一致
-        String strlist[] = {"name", "cell_number","duty"}; //还可以增加几个
-        String orderColumnName = strlist[myOrder];
+        String strList[] = {"login_id", "pwd","name","sex","duty","cell_number","photo_url","used"}; //还可以增加几个
+        String orderColumnName = strList[myOrder];
 
         System.out.println("前段监控选择排序的order（前段封装属性）：" + order);
         System.out.println("前段监控选择排序的order（强转int）：" + myOrder);
@@ -200,6 +207,7 @@ public class UserController extends BaseController{
         System.out.println("前段监控选择排序的 字段名（java属性） ：" + orderColumn);
         System.out.println("前段监控选择排序的 字段名（改造成对应sql 字段） ：" + orderColumnName);
         List<User> list = userService.findAll(dataTable.getSearch(), orderColumnName, orderDir);
+        //List<User> list = userService.findAll(dataTable.getSearch(), "login_id", "asc");
         //用PageInfo对结果进行包装
         PageInfo<User> pageInfo = new PageInfo<User>(list);
         //封装数据给DataTables

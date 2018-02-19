@@ -417,6 +417,10 @@
                                     <a href="static.html" >
                                         <span class="nav-text">Static table</span>
                                     </a>
+                                </li> <li>
+                                    <a href="<%=request.getContextPath()%>/userAction/page">
+                                        <span class="nav-text">Static table</span>
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="<%=request.getContextPath()%>/actionLog/adminTable" >

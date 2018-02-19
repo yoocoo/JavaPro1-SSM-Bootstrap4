@@ -18,5 +18,5 @@ public interface UserService extends BaseService<User> {
 
     void updateLoginSession(String sessionId, String LoginId);
 
-    List<User> findAll(String keyword,String column,String orderby);
+    List<User> findAll(String keyword,String column,String orders);
 }
