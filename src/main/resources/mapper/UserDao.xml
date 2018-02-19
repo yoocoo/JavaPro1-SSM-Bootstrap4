@@ -41,6 +41,29 @@
         `login_id`=#{loginId};
     </update>
 
+    <select id="findAll" resultType="User">
+    SELECT  *
+    FROM  USER
+        <if test="keyword != null and keyword != ''">
+            and (
+            `name` like CONCAT(CONCAT('%', #{keyword, jdbcType=VARCHAR}),'%') or
+            cell_number like CONCAT(CONCAT('%', #{keyword, jdbcType=VARCHAR}),'%') or
+            duty like CONCAT(CONCAT('%', #{keyword, jdbcType=VARCHAR}),'%')
+            )
+        </if>
+        order by
+        <choose>
+            <when test="order!=null">
+                ${order}
+                <if test="sort!=null">
+                    ${sort}
+                </if>
+            </when>
+            <otherwise>
+                age asc
+            </otherwise>
+        </choose>
+    </select>
     <!--更新session的id-->
     <update id="updateLoginSession">
       UPDATE

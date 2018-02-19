@@ -57,14 +57,9 @@ public class ActionLogController {
         List<UserActionLog> userList = actionLogService.getLogs();
         System.out.println("userList:" + new GsonUtils().toJson(userList));
 
-
         //用PageInfo对结果进行包装
         PageInfo<UserActionLog> pageInfos = new PageInfo<UserActionLog>(userList);
-        System.out.println("pageInfos!!!!:" + pageInfos);
-
         List<UserActionLog> pageList = pageInfos.getList();
-        System.out.println("pageList!!!!:" + pageList);
-
 
         //封装数据给DataTables
         dataTable.setDraw(dataTable.getDraw());
@@ -72,11 +67,10 @@ public class ActionLogController {
         dataTable.setRecordsTotal((int)pageInfos.getTotal());
         dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
         //返回数据到页面
-        System.out.println("所有的日志列表!!!!:" + new GsonUtils().toJson(dataTable));
-        System.out.println("总数!!!!:" + (int)pageInfos.getTotal());
         return dataTable;
     }
 
+    //循环遍历该数组
     //private List<GroupsDto> convertToGroupDto(List<Groups> list) {
     //    List<GroupsDto> newList = new ArrayList<>();
     //    for (Groups item : list) {

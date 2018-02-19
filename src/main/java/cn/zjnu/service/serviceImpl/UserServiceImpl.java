@@ -54,4 +54,10 @@ public class UserServiceImpl implements UserService {
         userDao.updateLoginSession(sessionId, loginId);
     }
 
+    @Override
+    public List<User> findAll(String keyword, String column, String orderby){
+        List<User>  list = userDao.findAll(keyword,column,orderby);
+        return list;
+    }
+
 }

@@ -5,9 +5,12 @@ import cn.zjnu.domain.User;
 import cn.zjnu.exception.*;
 import cn.zjnu.service.UserService;
 import cn.zjnu.service.serviceImpl.UserServiceImpl;
+import cn.zjnu.utils.DataTablePageUtil;
 import cn.zjnu.utils.GsonUtils;
 import cn.zjnu.utils.PublicUtil;
 import cn.zjnu.utils.StringUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 用户请求相关控制器
@@ -26,7 +30,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/userAction")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;    //自动载入Service对象
@@ -168,4 +172,42 @@ public class UserController {
         return new GsonUtils().toJson(responseObj);
     }
 
+    /**
+     * 用户列表
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/clist", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public Object pageLocationChangeList() {
+
+        DataTablePageUtil<User> dataTable = new DataTablePageUtil<User>(this.getRequest());
+        //开始分页：PageHelper会处理接下来的第一个查询
+        PageHelper.startPage(dataTable.getPage_num(), dataTable.getLength());
+        //还是使用List，方便后期用到
+        //排序参数
+        String order = getRequest().getParameter("order[0][column]");//排序的列号
+        int myOrder = Integer.parseInt(order);
+        String orderDir = getRequest().getParameter("order[0][dir]");//排序的顺序asc or desc
+        String orderColumn = getRequest().getParameter("columns[" + order + "][data]");//排序的列。注意，我认为页面上的列的名字要和表中列的名字一致，否则，会导致SQL拼接错误
+        //为了能让 字段名和 前段取得字段名一致
+        String strlist[] = {"name", "cell_number","duty"}; //还可以增加几个
+        String orderColumnName = strlist[myOrder];
+
+        System.out.println("前段监控选择排序的order（前段封装属性）：" + order);
+        System.out.println("前段监控选择排序的order（强转int）：" + myOrder);
+        System.out.println("前段监控选择排序的 升降序orderDir：" + orderDir);
+        System.out.println("前段监控选择排序的 字段名（java属性） ：" + orderColumn);
+        System.out.println("前段监控选择排序的 字段名（改造成对应sql 字段） ：" + orderColumnName);
+        List<User> list = userService.findAll(dataTable.getSearch(), orderColumnName, orderDir);
+        //用PageInfo对结果进行包装
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        //封装数据给DataTables
+
+        dataTable.setDraw(dataTable.getDraw());
+        dataTable.setData(pageInfo.getList());
+        dataTable.setRecordsTotal(pageInfo.getTotal());
+        dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
+        return dataTable;
+    }
 }

@@ -20,7 +20,7 @@ public interface UserDao extends Dao<User> {
 
     User findOneById(Serializable Id);
 
-    List<User> findAll();
+    List<User> findAll(String keyword,String column,String orderby );
 
     void updateLoginSession(@Param("sessionId") String sessionId,@Param("loginId")  String loginId);
 
