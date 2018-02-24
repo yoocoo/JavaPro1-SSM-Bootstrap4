@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="/static/B4/assets/datatable/buttons.bootstrap4.min.css" type="text/css"/>
     <link rel="stylesheet" href="/static/B4/assets/datatable/select.bootstrap4.min.css" type="text/css"/>
     <link rel="stylesheet" href="/static/B4/assets/datatable/editor.bootstrap4.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/B4/assets/pnotify/pnotify.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/B4/assets/pnotify/pnotify.buttons.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/B4/assets/pnotify/pnotify.nonblock.css" type="text/css"/>
     <!-- build:css /static/B4/assets/styles/app.min.css -->
     <link rel="stylesheet" href="/static/B4/assets/styles/app.css" type="text/css"/>
     <!-- endbuild -->
@@ -611,30 +614,51 @@
             <div class="padding">
                 <div class="box">
                     <div class="box-header">
-                        <h2>日志数据列表</h2>
+                        <h2>用户数据列表</h2>
                     </div>
                     <div class="table-responsive">
                         <table id="tables" cellspacing="0" width="100%" class="table table-striped b-t b-b">
                             <%--点击隐藏某列:--%>
 
-                                <p class="btn-groups">
 
-                                    <button  class="btn btn-outline b-primary text-primary">点击动态隐藏某列</button>
-                                    <button  data-column="0" class="btn btn-outline b-primary text-primary">账户名</button>
-                                    <button  data-column="1" class="btn btn-outline b-info text-info">姓名</button>
-                                    <button  data-column="2" class="btn btn-outline b-success text-success">年龄</button>
-                                    <button data-column="3" class="btn btn-outline b-warning text-warning">职务</button>
-                                    <button data-column="4" class="btn btn-outline b-danger text-danger">电话号码</button>
-                                </p>
+                            <%--点击隐藏某列:--%>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="0">隐藏账户命</a> -
+                            </label>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="1">隐藏第二列</a> -
+                            </label>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="2">隐藏第3列</a> -
+                            </label>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="3">隐藏第4列</a> -
+                            </label>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="4">隐藏第5列</a> -
+                            </label>
+                            <label class="btn btn-default">
+                                <a class="toggle-vis" type="radio" data-column="5">隐藏第6列</a> -
+                            </label>
+                            <%--<p class="btn-groups">--%>
+                            <%--&lt;%&ndash;<button  class="btn btn-outline b-primary text-primary">点击动态隐藏某列</button>&ndash;%&gt;--%>
+                            <%--<button  data-column="0" class="btn btn-outline b-primary text-primary">账户名</button>--%>
+                            <%--<button  data-column="1" class="btn btn-outline b-info text-info">姓名</button>--%>
+                            <%--<button  data-column="2" class="btn btn-outline b-success text-success">年龄</button>--%>
+                            <%--<button data-column="3" class="btn btn-outline b-warning text-warning">职务</button>--%>
+                            <%--<button data-column="4" class="btn btn-outline b-danger text-danger">电话号码</button>--%>
+                            <%--<button data-column="5" class="btn btn-outline b-danger text-danger">审核状态</button>--%>
+                            <%--</p>--%>
                             <thead>
                             <tr>
                                 <%--<th style="width:20%">头像</th>--%>
                                 <th style="width:20%">账户名</th>
-                                <th style="width:25%">姓名</th>
-                                <th style="width:25%">年龄</th>
+                                <th style="width:15%">姓名</th>
+                                <th style="width:10%">年龄</th>
                                 <th style="width:15%">职务</th>
-                                <th style="width:15%">电话号码</th>
-                                <th style="width:15%">审核状态</th>
+                                <th style="width:20%">电话号码</th>
+                                <th style="width:10%">审核状态</th>
+                                <th style="width: 10%">操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -809,16 +833,25 @@
 
 <!--DataTable-->
 <script src="/static/B4/libs/js/datatable/jquery.dataTables.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/dataTables.bootstrap4.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/dataTables.buttons.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/buttons.bootstrap4.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/dataTables.select.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/dataTables.editor.min.js"></script>
+
 <script src="/static/B4/libs/js/datatable/editor.bootstrap4.min.js"></script>
 
 <script src="/static/B4/libs/js/datatable/buttons.flash.min.js"></script>
 <script src="/static/B4/libs/js/datatable/buttons.html5.min.js"></script>
 <script src="/static/B4/libs/js/datatable/buttons.print.min.js"></script>
+<script src="/static/B4/libs/js/pnotify/pnotify.js"></script>
+<script src="/static/B4/libs/js/pnotify/pnotify.buttons.js"></script>
+<script src="/static/B4/libs/js/pnotify/pnotify.nonblock.js"></script>
 
 <script src="/static/B4/scripts/config.lazyload.js"></script>
 
@@ -843,108 +876,132 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        // $('.ui-pnotify').remove();
-        <%--editor = new $.fn.dataTable.Editor({--%>
-        <%--table: "#datatable-responsive",--%>
-        <%--ajax: {--%>
-        <%--edit: {--%>
-        <%--type: 'POST',--%>
-        <%--dataType: 'json',--%>
-        <%--url: '<%=request.getContextPath()%>/admin/user/rdelete',--%>
-        <%--data: function (params) {--%>
-        <%--//此处为定义查询条件 传给控制器的参数--%>
-        <%--params.userId = $("#userId").val()--%>
-        <%--return params;--%>
-        <%--},--%>
-        <%--success: function (data) { //请求成功，http状态码为200。返回的数据已经打包在data中了--%>
-        <%--if (data.code == 1) {  //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功--%>
-        <%--$(function () {--%>
-        <%--new PNotify({--%>
-        <%--title: '成功执行操作',--%>
-        <%--text: data.msg,--%>
-        <%--type: 'success',--%>
-        <%--styling: 'bootstrap3'--%>
-        <%--});--%>
-        <%--});--%>
-        <%--} else {//更新不成功--%>
-        <%--$(function () {--%>
-        <%--new PNotify({--%>
-        <%--title: '发现错误，请按提示',--%>
-        <%--text: data.msg,--%>
-        <%--type: 'error',--%>
-        <%--styling: 'bootstrap3'--%>
-        <%--});--%>
-        <%--});--%>
-        <%--}--%>
-        <%--},--%>
-        <%--error: function (err) {--%>
-        <%--alert("哎呀呀，系统出现未知错误，请联系系统管理员");--%>
-        <%--//                        window.location.reload();//重新刷新页面，还有一种方式：tables.draw(false);(这是不刷新，重新初始化插件，但是做删除时候，老有问题)--%>
-        <%--}--%>
-        <%--}--%>
+        $('.ui-pnotify').remove();
+          editor = new $.fn.dataTable.Editor({
+            table: "#tables",
+            ajax: {
+                edit: {
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '<%=request.getContextPath()%>/userAction/updateUser',
+                    data: function (params) {
+                        //此处为定义查询条件 传给控制器的参数
+                        params.loginId = $("#loginId").val()
+                        params.name = $("#name").val()
+                        params.age = $("#age").val()
+                        params.duty = $("#duty").val()
+                        params.cellNumber = $("#cellNumber").val()
+                        return params;
+                    },
+                    success: function (data) { //请求成功，http状态码为200。返回的数据已经打包在data中了
+                        if (data.code == 1) {  //获判断json数据中的code是否为1，登录的用户名和密码匹配，通过效验，登陆成功
+                            $(function () {
+                                new PNotify({
+                                    title: '成功执行操作',
+                                    text: data.msg,
+                                    type: 'success',
+                                    styling: 'bootstrap3'
+                                });
+                            });
+                        } else {//更新不成功
+                            $(function () {
+                                new PNotify({
+                                    title: '发现错误，请按提示',
+                                    text: data.msg,
+                                    type: 'error',
+                                    styling: 'bootstrap3'
+                                });
+                            });
+                        }
+                    },
+                    error: function (err) {
+                        alert("哎呀呀，系统出现未知错误，请联系系统管理员");
+                        //                        window.location.reload();//重新刷新页面，还有一种方式：tables.draw(false);(这是不刷新，重新初始化插件，但是做删除时候，老有问题)
+                    }
+                },
+                delelet:{
 
-        <%--},--%>
-        <%--idSrc: 'userId',--%>
-        <%--fields: [--%>
-        <%--{label: "id：", name: "userId", id: "userId"},--%>
-        <%--{--%>
-        <%--label: "名称：", name: "nickName", id: "nickName"--%>
-        <%--}, {--%>
-        <%--label: "账户：", name: "accountName", id: "accountName"--%>
-        <%--}, {--%>
-        <%--label: "真实姓名:", name: "realName", id: "realName"--%>
-        <%--}, {--%>
-        <%--label: "邮箱:", name: "email", id: "email"--%>
-        <%--}, {--%>
-        <%--label: "手机:", name: "mobilePhone", id: "mobilePhone"--%>
-        <%--}, {--%>
-        <%--label: "qq:", name: "qq", id: "qq"--%>
-        <%--}, {--%>
-        <%--label: "身份证号:", name: "idcard", id: "idcard"--%>
-        <%--}, {--%>
-        <%--label: "地址:", name: "postAdress", id: "postAdress"--%>
-        <%--}--%>
-        <%--], i18n: {--%>
-        <%--create: {--%>
-        <%--button: "新建",--%>
-        <%--title: "新建一条记录",--%>
-        <%--submit: "提交新建"--%>
-        <%--},--%>
-        <%--edit: {--%>
-        <%--button: "更新",--%>
-        <%--title: "更新该条记录",--%>
-        <%--submit: "提交更新"--%>
-        <%--},--%>
-        <%--error: {--%>
-        <%--system: "删除！"--%>
-        <%--}--%>
-        <%--}--%>
-        <%--});--%>
+                }
+
+            },
+            idSrc: 'loginId',
+            fields: [
+                {label: "账户名", name: "loginId", id: "loginId"},
+                {
+                    label: "姓名：", name: "name", id: "name"
+                }, {
+                    label: "年龄：", name: "age", id: "age"
+                }, {
+                    label: "职务:", name: "duty", id: "duty"
+                }, {
+                    label: "手机:", name: "cellNumber", id: "cellNumber"
+                }, {
+                    label: "是否被冻结:", name: "used", id: "used"
+                }
+            ], i18n: {
+                create: {
+                    button: "新建",
+                    title: "新建一条记录",
+                    submit: "提交新建"
+                },
+                edit: {
+                    button: "更新",
+                    title: "更新该条记录",
+                    submit: "提交更新"
+                },
+                error: {
+                    system: "删除！"
+                }
+            }
+        });
+
+
+        // New record
+        $('a.editor_create').on('click', function (e) {
+            e.preventDefault();
+
+            editor.create( {
+                title: '创建用户',
+                buttons: '添加'
+            } );
+        } );
+
 
         // Edit record
-        // $('#datatable-responsive').on('click', 'a.editor_edit', function (e) {
-        //     e.preventDefault();
-        //     editor.edit($(this).closest('tr'), {
-        //         title: '查看商户生产商信息',
-        //         buttons: '删除'
-        //     });
-        // });
+        $('#tables').on('click', 'a.editor_edit', function (e) {
+            e.preventDefault();
 
-//         editor.on('onInitEdit', function () {
-//             editor.hide('userId');
-// //            editor.disable('userId');
-//             editor.disable('nickName');
-//             editor.disable('accountName');
-//             editor.disable('realName');
-//             editor.disable('email');
-//             editor.disable('mobilePhone');
-//             editor.disable('qq');
-//             editor.disable('idcard');
-//             editor.disable('postAdress');
-//         });
+            editor.edit( $(this).closest('tr'), {
+                title: 'Edit 编辑记录',
+                buttons: 'Update/更新'
+            } );
+        } );
+
+        // Delete a record
+        $('#tables').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+
+            editor.remove( $(this).closest('tr'), {
+                title: 'Delete record /删除一条记录',
+                message: 'Are you sure you wish to remove this record/你确定要删除此用户吗?',
+                buttons: 'Delete/删除'
+            } );
+        } );
+
+        //
+        // editor.on('onInitEdit', function () {
+        //     // editor.hide('userId');
+        //     editor.disable('loginId');
+        //     editor.disable('name');
+        //     editor.disable('age');
+        //     editor.disable('duty');
+        //     editor.disable('email');
+        //     editor.disable('cellNumber');
+        //     editor.disable('used');
+        // });
         //DataTable
         var table = $('#tables').DataTable({
-        // $('#tables').DataTable({
+            // $('#tables').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 {
@@ -1013,24 +1070,30 @@
                     render: function (data, type, full, meta) {
                         if (data == true) {
                             return '<span class="label ">通过</span>'
-                            // return '<i class="fa fa-fw fa-star-o text-muted inline"></i>'
                         } else {
-                        return '<span class="label red">冻结</span>'
-                            // return '<i clasgreens="fa fa-fw fa-star text-danger none"></i>'
+                            return '<span class="label red">冻结</span>'
                         }
                         // var dataStr = Date.parse(data);
                         // return new Date(dataStr).Format("yyyy-MM-dd ");
                     }
+                },
+                {
+                    data: null,
+                    orderable: false,
+                    sortable: false,
+                    // defaultContent: '<a href="" class=" editor_edit fa fa-times text-danger inline">删除</a>' + ' <a href="" class=" editor_remove fa fa-file-text-o text-success inline">编辑</a>'
+                    defaultContent: '<a href="" class=" editor_edit ">编辑</a>' + ' <a href="" class=" editor_remove ">删除</a>'
                 }
+
 
             ],
             columnDefs: [
                 // {
                 //     "targets": 5,//编辑
                 //     "data": null,//下面这行，添加了编辑按钮和，删除按钮
-                //     "defaultContent": "<i>--</i>",
+                //     "defaultContent": "<i>--</i>"
                 //     "render": function (data, type, row) {
-                //         return '<a href="" class="editor_edit">删除</a>'
+                //         return '<a href="" class="">删除</a>'
                 //     }
                 // }
             ],
@@ -1042,15 +1105,15 @@
         });
 
         //        隐藏某列
-       $('a.toggle-vis').on( 'click', function (e) {
-           e.preventDefault();
+        $('a.toggle-vis').on('click', function (e) {
+            e.preventDefault();
 
-           // Get the column API object
-           var column = table.column( $(this).attr('data-column') );
+            // Get the column API object
+            var column = table.column($(this).attr('data-column'));
 
-           // Toggle the visibility
-           column.visible( ! column.visible() );
-       } );
+            // Toggle the visibility
+            column.visible(!column.visible());
+        });
     });
     // // Apply the search
 

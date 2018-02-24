@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 /***
-创建数据库用户表：
+ 创建数据库用户表：
  CREATE TABLE `user` (
  `login_id` varchar(20) NOT NULL COMMENT '登陆ID',
  `pwd` varchar(20) NOT NULL COMMENT '用户密码',

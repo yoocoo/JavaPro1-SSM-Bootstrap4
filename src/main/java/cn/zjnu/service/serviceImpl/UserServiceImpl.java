@@ -36,6 +36,20 @@ public class UserServiceImpl implements UserService {
             System.out.println("添加用户成功");
     }
 
+    @Override
+    public void update(User user) throws OtherThingsException {
+        int result = 0; //受影响的行数默认为0
+        try {
+            result = userDao.update(user);
+        } catch (Exception e) {
+            System.out.println("更新用户资料失败");
+            //其他用户添加失败异常
+            throw new OtherThingsException(e);
+        }
+        if (result > 0)
+            System.out.println("更新用户成功");
+    }
+
     public List<User> findAll(int pageNum, int pageSize) {
         return null;
     }

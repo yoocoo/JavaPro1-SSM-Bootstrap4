@@ -30,12 +30,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/userAction")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;    //自动载入Service对象
 
     private ResponseObj responseObj;
+
     /**
      * 用户数据列表
      *
@@ -181,6 +182,7 @@ public class UserController extends BaseController{
 
     /**
      * 用户列表
+     *
      * @return
      * @throws Exception
      */
@@ -198,7 +200,7 @@ public class UserController extends BaseController{
         String orderDir = getRequest().getParameter("order[0][dir]");//排序的顺序asc or desc
         String orderColumn = getRequest().getParameter("columns[" + order + "][data]");//排序的列。注意，我认为页面上的列的名字要和表中列的名字一致，否则，会导致SQL拼接错误
         //为了能让 字段名和 前段取得字段名一致
-        String strList[] = {"login_id", "pwd","name","sex","duty","cell_number","photo_url","used"}; //还可以增加几个
+        String strList[] = {"login_id", "pwd", "name", "sex", "duty", "cell_number", "photo_url", "used"}; //还可以增加几个
         String orderColumnName = strList[myOrder];
 
         System.out.println("前段监控选择排序的order（前段封装属性）：" + order);
@@ -217,5 +219,39 @@ public class UserController extends BaseController{
         dataTable.setRecordsTotal(pageInfo.getTotal());
         dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
         return dataTable;
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public Object update(User user) {
+        Object result;
+
+        responseObj = new ResponseObj<User>();
+
+        String name = user.getLoginId();//获取修改条件
+        //查找用户
+
+        if (null == user) {
+            responseObj.setCode(ResponseObj.FAILED);
+            responseObj.setMsg("提示：要修改的信息不能为空空！");
+            result = new GsonUtils().toJson(responseObj);
+            return result;
+        }
+        try {
+            userService.update(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            responseObj.setCode(ResponseObj.FAILED);
+            responseObj.setMsg("修改资料出现出现系统错误，请联系系统管理员 邮箱：110@qq.com");
+            result = new GsonUtils().toJson(responseObj);
+            return result;
+        }
+        responseObj.setCode(ResponseObj.OK);
+        responseObj.setMsg("提示：用户资料信息更新成功！");
+        responseObj.setData(user);
+        System.out.println("====user:===" + user);
+        result = new GsonUtils().toJson(responseObj);
+        result = result;
+        return result;
     }
 }

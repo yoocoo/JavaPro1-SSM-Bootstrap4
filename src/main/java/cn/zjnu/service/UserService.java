@@ -14,9 +14,11 @@ public interface UserService extends BaseService<User> {
 
     void add(User user) throws Exception;
 
+    void update(User user) throws Exception;
+
     User findUser(User user) throws Exception;
 
     void updateLoginSession(String sessionId, String LoginId);
 
-    List<User> findAll(String keyword,String column,String orders);
+    List<User> findAll(String keyword, String column, String orders);
 }
