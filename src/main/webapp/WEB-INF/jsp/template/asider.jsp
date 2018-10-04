@@ -213,7 +213,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="timeline.html" >
+                            <a href="<%=request.getContextPath()%>/userAction/pro_page">
                                 <span class="nav-text">时间线</span>
                             </a>
                         </li>
@@ -387,7 +387,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<%=request.getContextPath()%>/actionLog/adminTable">
+                            <a href="<%=request.getContextPath()%>/actionLog/pro_page">
                                 <span class="nav-text">Datatable</span>
                             </a>
                         </li>

@@ -49,6 +49,16 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 用户数据列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/pro_page")
+    public ModelAndView projectPage() {
+        ModelAndView view = new ModelAndView("admin/admin_project");
+        return view;
+    }
+    /**
      * 为什么返回值是一个ModelAndView，ModelAndView代表一个web页面<br/>
      * setViewName是设置一个jsp页面的名称
      *
