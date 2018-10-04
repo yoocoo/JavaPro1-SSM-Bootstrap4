@@ -10,4 +10,5 @@ public class TestName extends Date {
         System.out.println("获得父类名："+getClass().getSuperclass().getName());
 
     }
+
 }

@@ -128,7 +128,5 @@ public class ActionLogController {
             responseObj.setMsg("查询失败");
             return new GsonUtils().toJson(responseObj);
         }
-
-
     }
 }

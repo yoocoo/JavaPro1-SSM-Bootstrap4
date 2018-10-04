@@ -44,7 +44,25 @@
 
 -----
   昨天在医院呆了一天，进程耽误了
-#### 2018/2/19 用户表数据基本操作
+ #### 2018/2/20 IDEA使用教程
+            1.idea的代码补全分两类：1是单词补全，2是模板替换
+            其中模板替换可自定义：setting中的live template中
+            2. debug 快捷键
+           
+            2.1 -- 9            resume programe 恢复程序
+            2.2 -- Alt+F10       show execution point 显示执行断点
+            2.3 -- F8            Step Over 相当于eclipse的f6      跳到下一步
+            2.4 -- F7            Step Into 相当于eclipse的f5就是  进入到代码
+            2.5 -- Alt+shift+F7  Force Step Into 这个是强制进入代码
+            2.6 -- Shift+F8      Step Out  相当于eclipse的f8跳到下一个断点，也相当于eclipse的f7跳出函数
+            2.7 -- Atl+F9        Run To Cursor 运行到光标处
+            2.8 -- ctrl+shift+F9   debug运行java类
+            2.9 -- ctrl+shift+F10  正常运行java类
+            2.10 -- alt+F8          debug时选中查看值debug快捷键
+            
+            3.搜索引擎选择： Elasticsearch与Solr  http://i.zhcy.tk/index.html
+                                     
+#### 2018/2/19 用户表数据显示
 
 -----
 ![](readImage/userlist.png)
@@ -87,6 +105,14 @@
           
   ![](/readImage/update1.png)       执行更新操作
   ![](/readImage/update2.png)       更新成功后操作
+  -------
+  
+  #### 2018/2/25 用户表数据删除（软删除）
+  
+            1.往往数据表中执行删除操作需要谨慎，对没有关联的表格中数据可以直接删除。无后顾之忧。
+            若是关联度较大，可以增加一个字段，（1/0）来表示该记录是否删除。只要设置的好处就是，
+            其他表作删除某记录时候，也可以判断该先觉字段是否已经被删除。
+            举个例子 加入父亲表为商品分组表，子表为商品信息表。若要删除某商品分组，一定要判断该商品分组下有没有商品。
             
   
   

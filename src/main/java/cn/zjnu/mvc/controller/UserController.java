@@ -57,9 +57,7 @@ public class UserController extends BaseController {
      * @return 返回一个web页面
      * @throws Exception
      */
-    @RequestMapping(value = "/reg"
-            , method = RequestMethod.POST
-            , produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/reg", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object reg(HttpServletRequest request, HttpServletResponse response, User user, HttpSession session) throws Exception {
         Object result;
@@ -110,9 +108,7 @@ public class UserController extends BaseController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "/login"
-            , method = RequestMethod.POST
-            , produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object login(HttpServletRequest request, HttpServletResponse response, User user, HttpSession session) throws Exception {
         Object result;
@@ -127,12 +123,10 @@ public class UserController extends BaseController {
             result = new GsonUtils().toJson(responseObj);
             return result; //返回json
         }
+
         if (StringUtils.isEmpty(user.getLoginId()) || StringUtils.isEmpty(user.getPwd())) {
             responseObj = new ResponseObj<User>();
-            responseObj.setCode(ResponseObj.FAILED);
-            responseObj.setMsg("用户名或密码不能为空");
-            result = new GsonUtils().toJson(responseObj);
-            return result;
+            return StringisEmpty(responseObj, "用户名或密码不能为空!");
         }
         //查找用户
         User user1 = userService.findUser(user);
@@ -154,17 +148,14 @@ public class UserController extends BaseController {
                 result = new GsonUtils().toJson(responseObj);
             } else {
                 responseObj = new ResponseObj<User>();
-                responseObj.setCode(ResponseObj.FAILED);
-                responseObj.setMsg("用户密码错误");
-                result = new GsonUtils().toJson(responseObj);
+                result = StringisEmpty(responseObj, "用户名或密码错误!");
+
             }
         }
         return result;
     }
 
-    @RequestMapping(value = "/uploadHeadPic"
-            , method = RequestMethod.POST
-            , produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/uploadHeadPic", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     @ResponseBody
     public Object uploadHeadPic(@RequestParam(required = false) MultipartFile file, HttpSession session) {
 
@@ -233,7 +224,7 @@ public class UserController extends BaseController {
 
         if (null == user) {
             responseObj.setCode(ResponseObj.FAILED);
-            responseObj.setMsg("提示：要修改的信息不能为空空！");
+            responseObj.setMsg("提示：要修改的信息不能为空！");
             result = new GsonUtils().toJson(responseObj);
             return result;
         }
