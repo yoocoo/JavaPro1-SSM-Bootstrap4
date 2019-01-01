@@ -127,38 +127,56 @@
                     </li>
                     <li class="tl-item">
                         <div class="tl-wrap b-info">
-                            <span class="tl-date text-muted">2018年2月</span>
+                            <span class="tl-date text-muted">2018.2</span>
                             <div class="tl-content">
-                                项目开始搭建
+                            spring+springmvc+mybatis+redis+bootstrap4+mysql
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-header">
+                        <div class="btn btn-sm white btn-rounded">2018</div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-primary">
+                            <span class="tl-date text-muted">2018新年伊始</span>
+                            <div class="tl-content box-color text-color p-a-sm">
+                                <span class="arrow b-white left pull-up hidden-left"></span>
+                                <span class="arrow b-white right pull-up visible-left"></span>
+                                <div class="text-lt">项目开始搭建,bootstrap4还未大面积推广，从网站下载了一套还在收费的模板。希望能得到合理的使用。
+                                    经历这段时间的学习，明白了很多事情都是一点一滴的积累出来的。
+                                    以前的我总是喜欢一蹴而就，三分钟的热度，还带着一股小小的对新技术的热爱和小执着。
+                                    如果你真的努力了，定会有成果。</div>
                             </div>
                         </div>
                     </li>
                     <li class="tl-item">
                         <div class="tl-wrap b-success">
-                            <span class="tl-date text-muted">2018年2月-5月求职</span>
+                            <span class="tl-date text-muted">2018.2-5</span>
                             <div class="tl-content box-color text-color  p-a-sm">
                                 <span class="arrow b-white left pull-top"></span>
-                                <div>项目搁置</div>
+                                <div>因在求职阶段，专心备战专业技术，项目搁置</div>
                             </div>
                         </div>
                     </li>
                     <li class="tl-item tl-left">
                         <div class="tl-wrap b-primary">
-                            <span class="tl-date text-muted">2018年10月</span>
+                            <span class="tl-date text-muted">2018.10</span>
                             <div class="tl-content box-color primary p-a-sm">
                                 <span class="arrow b-primary left pull-top hidden-left"></span>
                                 <span class="arrow b-primary right pull-top visible-left"></span>
-                                <div class="text-lt">不抛弃不放弃</div>
+                                <div class="text-lt">不抛弃不放弃！！！从哪里跌倒就从哪里爬起来</div>
                             </div>
                         </div>
                     </li>
                     <li class="tl-item">
                         <div class="tl-wrap b-primary">
-                            <span class="tl-date text-muted">04.2014</span>
+                            <span class="tl-date text-muted">2018.10.5</span>
                             <div class="tl-content box-color text-color w-xl w-auto-xs">
                                 <span class="arrow b-white left pull-top"></span>
-                                <div class="text-lt p-x m-b-sm">With Title</div>
+                                <div class="text-lt p-x m-b-sm">提高代码复用率</div>
                                 <div class="p-a b-t b-light">
+                                    容易看懂的代码叫直观，也叫复用率低代码。
+
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum ullamcorper
                                 </div>
                             </div>
